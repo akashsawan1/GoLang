@@ -85,6 +85,24 @@ func main() {
 		// fmt.Println("Our conference is booked out,come back next year.")
 		// }
 	}
-
 	
+
+	city := "London"  	
+	
+	switch city {
+
+	case "New York" :
+		//code
+	case "Singapore" :
+		//code
+	case "London","Berlin" : 
+		//code
+	case "Mexico" :
+		//code
+	case "Mumbai" :
+		//code
+	default :
+		fmt.Println("Not a Valid City")
+	
+	}
 }
