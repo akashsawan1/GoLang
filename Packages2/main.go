@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"packages/helper"
 )
 var conferenceName = "Akash Conference"
 const conferenceTickets = 55
@@ -21,19 +22,14 @@ func main() {
 		userName, lastName, email, userTicket := getUserInput()
 
 
-		isValidName, isValidemail, isValidTicket := validateUserInput(userName, lastName, email, userTicket)
+		isValidName, isValidemail, isValidTicket := helper.ValidateUserInput(userName, lastName, email, userTicket, remainingTickets)
 		
-		// isValidCity := city == "Singapore" || city == "London"
-		
-		// isInValidCity := city != "Singapore" || city != "London"
+
 		
 		if isValidName && isValidemail && isValidTicket {
 
 			bookTicket( userTicket , userName, lastName, email)
-			// fmt.Printf("The whole array: %v\n", bookings)
-			// fmt.Printf("The first value: %v\n", bookings[0])
-			// fmt.Printf("Array type : %T\n", bookings)
-			// fmt.Printf("array length : %v\n", len(bookings))
+
 			
 			
 			firstNames := getFirstNames()
@@ -53,11 +49,7 @@ func main() {
 					}
 					
 				}
-				// or
-				// noTicketsRemaining := remainingTickets == 0
-				// if noTicketsRemaining {
-					// fmt.Println("Our conference is booked out,come back next year.")
-					// }
+
 				}
 
 			}
@@ -79,12 +71,6 @@ func getFirstNames() []string{
 }
 
 
-func validateUserInput(userName string, lastName string, email string, userTicket uint) (bool, bool ,bool) {
-	isValidName := len(userName) >= 2 && len(lastName) >= 2
-	isValidemail := strings.Contains(email, "@")
-	isValidTicket := userTicket > 0 && userTicket <= remainingTickets
-	return isValidName, isValidemail, isValidTicket
-}
 
 func getUserInput() (string,string, string, uint) {
 	var userName string
