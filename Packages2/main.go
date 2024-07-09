@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"packages/helper"
+	"strconv"
 )
 var conferenceName = "Akash Conference"
 const conferenceTickets = 55
 var remainingTickets uint = 50 //for positive integer
-var bookings = []string{}
+var bookings = make([]map[string]string,0)
 
 func main() {
 
@@ -63,9 +63,9 @@ func main() {
 func getFirstNames() []string{
 	firstNames := []string{}
 	for _, booking := range bookings {
-		var name = strings.Fields(booking)
-		firstName := name[0]
-		firstNames = append(firstNames, firstName)
+		// var name = strings.Fields(booking)
+		// firstName := name[0]
+		firstNames = append(firstNames, booking["firstName"])
 	}
 	return firstNames
 }
@@ -94,7 +94,17 @@ func getUserInput() (string,string, string, uint) {
 
 func bookTicket( userTicket uint,  userName string, lastName string, email string) {
 	remainingTickets = remainingTickets - userTicket
-	bookings = append(bookings, userName+" "+lastName)
+
+	var UserData =  make(map[string]string, 0)
+	UserData["firstName"] = userName
+	UserData["lastName"] = lastName
+	UserData["No of Tickets"] = strconv.FormatUint(uint64(userTicket),10)
+
+
+
+	bookings = append(bookings, UserData)
+
+	fmt.Printf("Here,Are all the list of booking %v\n", bookings)
 	
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", userName, lastName, userTicket, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
